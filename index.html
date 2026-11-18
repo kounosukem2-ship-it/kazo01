@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>マイGASアプリ ポータル</title>
   
-  <!-- ★ ファビコンおよびスマホ用アイコンの設定 -->
+  <!-- ファビコンおよびスマホ用アイコンの設定 -->
   <link rel="icon" href="./kazo.ico" type="image/x-icon">
   <link rel="shortcut icon" href="./kazo.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="./kazo.ico">
@@ -21,38 +21,27 @@
       height: 100vh;
       box-sizing: border-box;
     }
-    /* ヘッダー・メニューバー */
+    /* ヘッダー・メニューバー（高さを抑えコンパクトに） */
     header {
       background-color: #2c3e50;
-      color: white;
-      padding: 8px 12px;
+      padding: 6px 10px;
       display: flex;
-      flex-direction: column;
-      gap: 6px;
+      align-items: center;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       z-index: 10;
-    }
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    h1 {
-      margin: 0;
-      font-size: 16px;
     }
     /* アプリ切り替えタブ・ボタン群 */
     .nav-buttons {
       display: flex;
       gap: 6px;
       overflow-x: auto;
-      padding-bottom: 2px;
+      width: 100%;
     }
     .nav-btn {
       background-color: #34495e;
       color: #bdc3c7;
       border: 1px solid #4e6d8d;
-      padding: 6px 12px;
+      padding: 5px 10px;
       border-radius: 4px;
       cursor: pointer;
       font-size: 12px;
@@ -97,10 +86,7 @@
 <body>
 
   <header>
-    <div class="header-top">
-      <h1>🚀 マイGASアプリ ポータル</h1>
-    </div>
-    <!-- アプリ切り替えメニュー -->
+    <!-- アプリ切り替えメニュー（ボタンのみを横並び） -->
     <div class="nav-buttons" id="navButtons">
       <!-- JavaScriptで自動生成されます -->
     </div>
