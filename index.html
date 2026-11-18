@@ -1,10 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>マイGASアプリ ポータル</title>
+  
+  <!-- ★ ファビコンおよびスマホ用アイコンの設定 -->
+  <link rel="icon" href="./kazo.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="./kazo.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="./kazo.ico">
+
   <style>
     body {
       font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -95,7 +100,7 @@
     <div class="header-top">
       <h1>🚀 マイGASアプリ ポータル</h1>
     </div>
-    <!-- アプリ切り替えメニュー（ここに他のGASアプリの.execを追加できます） -->
+    <!-- アプリ切り替えメニュー -->
     <div class="nav-buttons" id="navButtons">
       <!-- JavaScriptで自動生成されます -->
     </div>
@@ -108,20 +113,22 @@
 
   <script>
     // ==========================================
-    // 💡 ここに登録したいGASアプリの情報を追加・変更してください
+    // 💡 登録するGASアプリの一覧
     // ==========================================
     const apps = [
       {
         id: 'family-manager',
         name: '🏡 家族の予定＆ご飯',
         url: 'https://script.google.com/macros/s/AKfycbxv8hdLpsVR-JtrMof8h1Tj7i0EFGKnFF4L4q4xmuu6PXbwo3HhcNyz_FYVp81v4dyA/exec'
-      },
-      {
-        id: 'app-2',
-        name: '📊 その他のアプリ2',
-        url: 'https://script.google.com/macros/s/別のGASアプリのデプロイID/exec'
       }
-      // 必要に応じてカンマ区切りで増やせます
+      /* 
+        今後アプリを追加する場合は、以下のようにカンマで繋げて増やせます：
+      , {
+        id: 'app-2',
+        name: '📊 追加アプリ2',
+        url: 'https://script.google.com/macros/s/別のデプロイID/exec'
+      }
+      */
     ];
 
     let currentAppId = apps[0].id;
