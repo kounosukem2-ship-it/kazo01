@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>マイGASアプリ ポータル</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #eef2f3;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      box-sizing: border-box;
+    }
+    /* ヘッダー・メニューバー */
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: 16px;
+    }
+    /* アプリ切り替えタブ・ボタン群 */
+    .nav-buttons {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .nav-btn {
+      background-color: #34495e;
+      color: #bdc3c7;
+      border: 1px solid #4e6d8d;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      background-color: #4e6d8d;
+      color: white;
+    }
+    .nav-btn.active {
+      background-color: #3498db;
+      color: white;
+      border-color: #2980b9;
+    }
+    /* メインコンテンツ（iframe表示領域） */
+    .content-area {
+      flex: 1;
+      width: 100%;
+      background: #fff;
+      position: relative;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    /* ローディング表示 */
+    .loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 14px;
+      color: #666;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-top">
+      <h1>🚀 マイGASアプリ ポータル</h1>
+    </div>
+    <!-- アプリ切り替えメニュー（ここに他のGASアプリの.execを追加できます） -->
+    <div class="nav-buttons" id="navButtons">
+      <!-- JavaScriptで自動生成されます -->
+    </div>
+  </header>
+
+  <div class="content-area">
+    <div id="loading" class="loading">アプリを読み込み中...</div>
+    <iframe id="appFrame" onload="hideLoading()"></iframe>
+  </div>
+
+  <script>
+    // ==========================================
+    // 💡 ここに登録したいGASアプリの情報を追加・変更してください
+    // ==========================================
+    const apps = [
+      {
+        id: 'family-manager',
+        name: '🏡 家族の予定＆ご飯',
+        url: 'https://script.google.com/macros/s/あなたの家族アプリのデプロイID/exec'
+      },
+      {
+        id: 'app-2',
+        name: '📊 その他のアプリ2',
+        url: 'https://script.google.com/macros/s/別のGASアプリのデプロイID/exec'
+      }
+      // 必要に応じてカンマ区切りで増やせます
+    ];
+
+    let currentAppId = apps[0].id;
+
+    function initNav() {
+      const navContainer = document.getElementById('navButtons');
+      navContainer.innerHTML = '';
+
+      apps.forEach(app => {
+        const btn = document.createElement('button');
+        btn.className = 'nav-btn' + (app.id === currentAppId ? ' active' : '');
+        btn.innerText = app.name;
+        btn.onclick = () => switchApp(app.id);
+        navContainer.appendChild(btn);
+      });
+
+      // 初期アプリの読み込み
+      switchApp(currentAppId);
+    }
+
+    function switchApp(appId) {
+      currentAppId = appId;
+      const targetApp = apps.find(a => a.id === appId);
+      
+      // ボタンのアクティブ状態を更新
+      document.querySelectorAll('.nav-btn').forEach((btn, index) => {
+        if (apps[index].id === appId) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // ローディングを表示してiframeのsrcを切り替え
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('appFrame').src = targetApp.url;
+    }
+
+    function hideLoading() {
+      document.getElementById('loading').style.display = 'none';
+    }
+
+    // ページ読み込み時にメニューを構築
+    window.onload = initNav;
+  </script>
+</body>
+</html>
